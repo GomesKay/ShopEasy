@@ -1,15 +1,12 @@
 import { prisma } from "../lib/prisma"
-import { CreateProductInput } from "../types/product"
-
-export async function getAllProducts() {
-  return await prisma.product.findMany()
-}
+import { CreateProductInput, DeleteProductInput } from "../types/product"
 
 export async function createProduct({
   name,
   description,
   price,
   imageUrl,
+  categoryId,
 }: CreateProductInput) {
   return await prisma.product.create({
     data: {
@@ -17,6 +14,13 @@ export async function createProduct({
       description,
       price,
       imageUrl,
+      categoryId,
     },
+  })
+}
+
+export async function deleteProduct({ id, categoryId }: DeleteProductInput) {
+  return await prisma.product.delete({
+    where: { id, categoryId },
   })
 }
