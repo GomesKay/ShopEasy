@@ -1,7 +1,9 @@
 import { Product } from "./product-model"
 
-export interface Category {
+export type Category = {
   id: string
   name: string
   products: Product[]
+  createdAt: Date
+  updatedAt: Date
 }
